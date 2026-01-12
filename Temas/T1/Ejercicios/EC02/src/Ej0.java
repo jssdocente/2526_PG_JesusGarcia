@@ -3,6 +3,7 @@ public class Ej07 {
 
         // --- Datos de los productos ---
         String nombreProd1 = "Teclado Mecánico";
+        
         int cantProd1 = 2;
         double precioProd1 = 89.99;
 
