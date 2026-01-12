@@ -6,7 +6,7 @@ public class Ej07 {
         int cantProd1 = 2;
         double precioProd1 = 89.99;
 
-        String nombreProd2 = "Ratón Gaming RGB";
+        String nombreProd2 = "Ratón Gaming RGBBBB";
         int cantProd2 = 1;
         double precioProd2 = 54.50;
 
