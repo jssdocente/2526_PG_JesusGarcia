@@ -19,7 +19,84 @@ public class Heroe {
 
         this.nombre = nombre;
         this.rol = rol;
+    }
 
+    // #region Propiedades
+    public String getNombre() {
+        return this.nombre;
+    }
+
+    public int getNivel() {
+        return this.nivel;
+    }
+
+    public int getSalud() {
+        return this.salud;
+    }
+
+    public String getRol() {
+        return this.rol;
+    }
+
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    public void setSalud(int salud) {
+        this.salud = salud;
+    }
+    // #endregion
+
+    public void Presentarse() {
+        System.out.printf("Hola, soy %s y soy un nivel %d y soy un %s\n",
+                this.nombre, this.nivel, this.rol);
+    }
+
+    public void subirNivel() {
+        this.nivel += 1;
+        this.salud += 10;
+        System.out.printf("%s ha subido al nivel %d!\n", this.nombre, this.nivel);
+    }
+
+    public void sufrirDaño(int nivelDaño) {
+        switch (nivelDaño) {
+            case 3:
+                this.salud -= 30;
+                break;
+            case 2:
+                this.salud -= 20;
+                break;
+            case 1:
+                this.salud -= 10;
+                break;
+
+            default:
+                System.out.println("Dano no permitido");
+                break;
+        }
+
+        if (this.salud < 0)
+            this.salud = 0;
+    }
+
+    public void beberPocion() {
+        this.salud += 20;
+
+        if (this.salud > 100) {
+            this.salud = 100;
+        }
+    }
+
+    public void atacar(Heroe objetivo) {
+        objetivo.sufrirDaño(1);
     }
 
 }

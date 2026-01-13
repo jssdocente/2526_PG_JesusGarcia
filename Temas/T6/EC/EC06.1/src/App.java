@@ -1,12 +1,15 @@
 public class App {
     public static void main(String[] args) throws Exception {
 
-        Heroe h1 = new Heroe("Gandalf", "Mago");
+        Heroe gandalf = new Heroe("Gandalf", "Mago");
+        Heroe aragorn = new Heroe("Aragorn", "Guerrero");
 
-        // Al primero llámalo "Gandalf", rol "Mago", salud 100.
-        // Al segundo "Aragorn", rol "Guerrero", salud 150.
+        gandalf.atacar(aragorn);
+        aragorn.getSalud();
+        aragorn.beberPocion();
 
-        Heroe h2 = new Heroe("Aragorn", "Guerrero");
+        System.out.println("");
 
     }
+
 }
