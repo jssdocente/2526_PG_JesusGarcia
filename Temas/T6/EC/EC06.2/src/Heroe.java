@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Heroe {
 
     // Constante
@@ -111,30 +113,25 @@ public class Heroe {
         System.out.printf("%s ha subido al nivel %d!\n", this.nombre, this.nivel);
     }
 
-    public void sufrirDaño(int nivelDaño) {
-        switch (nivelDaño) {
-            case 3:
-                this.setSalud(this.salud - 30);
-                break;
-            case 2:
-                this.setSalud(this.salud - Heroe.VALOR_ATAQUE);
-                break;
-            case 1:
-                this.setSalud(this.salud - 10);
-                break;
+    public void recibirDaño(int daño) {
 
-            default:
-                System.out.println("Dano no permitido");
-                break;
-        }
+        if (daño > 100)
+            daño = 100;
+
+        this.setSalud(this.salud - daño);
     }
 
     public void beberPocion() {
         this.setSalud(this.salud + 20);
     }
 
-    public void atacar(Heroe objetivo) {
-        objetivo.sufrirDaño(1);
+    public void atacar(Heroe enemigo) {
+
+        Random rnd = new Random();
+        int dañoProducido = rnd.nextInt(10, 30);
+
+        enemigo.recibirDaño(dañoProducido);
+        System.out.printf("%s ataca a %s y le quita %d de vida.\n", this.nombre, enemigo.getNombre(), dañoProducido);
     }
 
 }
