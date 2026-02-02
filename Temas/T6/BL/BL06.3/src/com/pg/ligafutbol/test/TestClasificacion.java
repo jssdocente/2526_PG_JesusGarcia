@@ -1,13 +1,58 @@
 // TestClasificacion.java
 package com.pg.ligafutbol.test;
 
+import com.pg.ligafutbol.Clasificacion;
 import com.pg.ligafutbol.Equipo;
 import com.pg.ligafutbol.FilaClasificacion;
 import com.pg.ligafutbol.Partido;
 
 public class TestClasificacion {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
+        System.out.println(">>> Test: Clasificacion (Stats)");
+
+        // testFilaClasificacion();
+        testActualizarClasificacion();
+
+        System.out.println("✅ Clasificación verificada.");
+
+    }
+
+    public static void testActualizarClasificacion() throws Exception {
+
+        // Crear el escenario
+        Clasificacion cl = new Clasificacion();
+
+        Equipo e1 = new Equipo(1, "Valencia");
+        Equipo e2 = new Equipo(2, "Getafe");
+
+        cl.addEquipo(e1);
+        cl.addEquipo(e2);
+
+        Partido p1 = new Partido(e1, e2);
+        p1.setResultado(4, 2);
+
+        // Actuar
+        cl.actualizar(p1);
+
+        // Assert
+        FilaClasificacion clEquipo = cl.getEquipoClasificacion(e1);
+
+        assert clEquipo.getPuntos() == 3 : "E1: Error puntos totales";
+        assert clEquipo.getGolesFavor() == 3 : "E1: Error goles favor";
+        assert clEquipo.getGolesContra() == 2 : "E1: Error goles contra";
+        assert clEquipo.getPartidosJugados() == 1 : "E1: Error partidos jugados";
+
+        clEquipo = cl.getEquipoClasificacion(e2);
+
+        assert clEquipo.getPuntos() == 0 : "E2: Error puntos totales";
+        assert clEquipo.getGolesFavor() == 2 : "E2: Error goles favor";
+        assert clEquipo.getGolesContra() == 3 : "E2: Error goles contra";
+        assert clEquipo.getPartidosJugados() == 1 : "E2: Error partidos jugados";
+
+    }
+
+    public static void testFilaClasificacion() {
         System.out.println(">>> Test: FilaClasificacion (Stats)");
         Equipo e1 = new Equipo(1, "Valencia");
 

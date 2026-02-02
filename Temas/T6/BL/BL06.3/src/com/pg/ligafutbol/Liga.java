@@ -64,7 +64,7 @@ public class Liga {
             // Coger la 1ª jornada y que sea la 1ª de la 2ª vuelta
             Jornada jVoltear = this.jornadas[njorn];
 
-            int nuevoIdJornada = njorn + NumJornadas;
+            int nuevoIdJornada = njorn + NumJornadas + 1;
             Jornada jornada = new Jornada(nuevoIdJornada);
             jornadas[nuevoIdJornada - 1] = jornada;
 
@@ -86,4 +86,37 @@ public class Liga {
         }
 
     }
+
+    public void imprimirCalendario() {
+
+        // Recorrer cada una de las jornadas
+        for (Jornada jornada : this.jornadas) {
+
+            System.out.printf("\n==== JORNADA %d =========\n", jornada.getNumeroJornada());
+
+            // Recorrer cada uno de los partidos
+            for (Partido partido : jornada.getPartidos()) {
+
+                Equipo local = partido.getEquipoLocal();
+                Equipo visitante = partido.getEquipoVisitante();
+
+                System.out.printf("%20s vs  %-20s\n", local.getNombre(), visitante.getNombre());
+            }
+
+        }
+
+    }
+
+    public void imprimrLiga() {
+
+        System.out.printf("\n==== EQUIPOS DE LA LIGA =========\n");
+
+        // Recorrer todos los equipos de la liga
+        for (Equipo equipo : this.equipos) {
+
+            System.out.printf("%5s - %s\n", equipo.getCodigo(), equipo.getNombre());
+        }
+
+    }
+
 }

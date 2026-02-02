@@ -9,7 +9,9 @@ public class TestLiga {
 
         System.out.println(">>> Test: Liga");
 
-        testGenerarCalendario();
+        // testGenerarCalendario();
+        // testImprimirCalendario();
+        testImprimirLiga();
 
         System.out.println("✅ Liga verificada.");
     }
@@ -20,6 +22,25 @@ public class TestLiga {
         Liga liga = new Liga();
 
         liga.generarCalendario();
+
+    }
+
+    public static void testImprimirCalendario() throws Exception {
+
+        // Configurar escenario
+        Liga liga = new Liga();
+        liga.generarCalendario();
+
+        liga.imprimirCalendario();
+
+    }
+
+    public static void testImprimirLiga() throws Exception {
+
+        // Configurar escenario
+        Liga liga = new Liga();
+
+        liga.imprimrLiga();
 
     }
 

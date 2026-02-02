@@ -9,6 +9,17 @@ public class Clasificacion {
     public Clasificacion() {
     }
 
+    public FilaClasificacion getEquipoClasificacion(Equipo equipo) {
+
+        for (FilaClasificacion fila : equipos) {
+            if (fila.getEquipo().getCodigo() == equipo.getCodigo()) {
+                return fila;
+            }
+        }
+
+        return null;
+    }
+
     public void addEquipo(Equipo equipo) throws Exception {
         idxUltimoEquipo += 1;
         if (idxUltimoEquipo >= 6)
@@ -16,6 +27,30 @@ public class Clasificacion {
 
         FilaClasificacion fila = new FilaClasificacion(equipo);
         equipos[idxUltimoEquipo] = fila;
+    }
+
+    public void actualizar(Partido partido) {
+
+        // 1. Obtener equipo local y equipo visitante
+        Equipo local = partido.getEquipoLocal();
+        Equipo visitante = partido.getEquipoVisitante();
+
+        // Buscar la FilaClasificación el equipo Local
+        for (FilaClasificacion fila : equipos) {
+            if (fila.getEquipo().getCodigo() == local.getCodigo()) {
+                fila.actualizarStats(partido.getGolesLocal(), partido.getGolesVisitante());
+                break;
+            }
+        }
+
+        // Buscar la FilaClasificación el equipo Visitante
+        for (FilaClasificacion fila : equipos) {
+            if (fila.getEquipo().getCodigo() == visitante.getCodigo()) {
+                fila.actualizarStats(partido.getGolesVisitante(), partido.getGolesLocal());
+                break;
+            }
+        }
+
     }
 
 }

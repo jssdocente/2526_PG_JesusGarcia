@@ -29,6 +29,10 @@ public class FilaClasificacion {
 
     }
 
+    public Equipo getEquipo() {
+        return equipo;
+    }
+
     public int getPuntos() {
         return this.puntos;
     }
