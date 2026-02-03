@@ -12,9 +12,40 @@ public class TestClasificacion {
         System.out.println(">>> Test: Clasificacion (Stats)");
 
         // testFilaClasificacion();
-        testActualizarClasificacion();
+        // testActualizarClasificacion();
+        testImprimirClasificacion();
 
         System.out.println("✅ Clasificación verificada.");
+
+    }
+
+    public static void testImprimirClasificacion() throws Exception {
+
+        // Crear el escenario
+        Clasificacion cl = new Clasificacion();
+
+        Equipo e1 = new Equipo(1, "Valencia");
+        Equipo e2 = new Equipo(2, "Getafe");
+        Equipo e3 = new Equipo(3, "B");
+        Equipo e4 = new Equipo(4, "C");
+        Equipo e5 = new Equipo(5, "D");
+        Equipo e6 = new Equipo(6, "D");
+
+        cl.addEquipo(e1);
+        cl.addEquipo(e2);
+        cl.addEquipo(e3);
+        cl.addEquipo(e4);
+        cl.addEquipo(e5);
+        cl.addEquipo(e6);
+
+        Partido p1 = new Partido(e1, e2);
+        p1.setResultado(2, 4);
+
+        cl.actualizar(p1);
+        cl.ordenar();
+
+        // Actuar
+        cl.imprimirClasificacion();
 
     }
 

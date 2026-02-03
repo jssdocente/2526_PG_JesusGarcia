@@ -53,4 +53,37 @@ public class Clasificacion {
 
     }
 
+    public void imprimirClasificacion() {
+
+        System.out.printf("\n==== CLASIFICACIÓN LIGA =========\n");
+
+        for (FilaClasificacion fila : equipos) {
+            if (fila == null)
+                continue;
+
+            Equipo equipo = fila.getEquipo();
+
+            System.out.printf("%5s - %s\n", equipo.getCodigo(), equipo.getNombre());
+        }
+
+    }
+
+    public void ordenar() {
+
+        int n = this.equipos.length;
+        // Bucle externo para recorrer todo el array
+        for (int i = 0; i < n - 1; i++) {
+            // Bucle interno para comparar elementos adyacentes
+            // n-i-1 evita comparar los elementos que ya están ordenados al final
+            for (int j = 0; j < n - i - 1; j++) {
+                if (this.equipos[j].getPuntos() > this.equipos[j + 1].getPuntos()) {
+                    // Intercambio de valores usando una variable temporal
+                    FilaClasificacion temp = this.equipos[j];
+                    this.equipos[j] = this.equipos[j + 1];
+                    this.equipos[j + 1] = temp;
+                }
+            }
+        }
+    }
+
 }
