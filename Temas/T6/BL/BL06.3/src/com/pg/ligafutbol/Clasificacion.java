@@ -37,7 +37,7 @@ public class Clasificacion {
 
         // Buscar la FilaClasificación el equipo Local
         for (FilaClasificacion fila : equipos) {
-            if (fila.getEquipo().getCodigo() == local.getCodigo()) {
+            if (fila != null && fila.getEquipo().getCodigo() == local.getCodigo()) {
                 fila.actualizarStats(partido.getGolesLocal(), partido.getGolesVisitante());
                 break;
             }
@@ -45,11 +45,14 @@ public class Clasificacion {
 
         // Buscar la FilaClasificación el equipo Visitante
         for (FilaClasificacion fila : equipos) {
-            if (fila.getEquipo().getCodigo() == visitante.getCodigo()) {
+            if (fila != null && fila.getEquipo().getCodigo() == visitante.getCodigo()) {
                 fila.actualizarStats(partido.getGolesVisitante(), partido.getGolesLocal());
                 break;
             }
         }
+
+        // Llama al método ordenar
+        this.ordenar();
 
     }
 
@@ -70,14 +73,35 @@ public class Clasificacion {
 
     public void ordenar() {
 
-        int n = this.equipos.length;
+        // Usamos el número real de equipos añadidos, no el tamaño total del array
+        int n = this.idxUltimoEquipo + 1;
+
         // Bucle externo para recorrer todo el array
         for (int i = 0; i < n - 1; i++) {
             // Bucle interno para comparar elementos adyacentes
             // n-i-1 evita comparar los elementos que ya están ordenados al final
             for (int j = 0; j < n - i - 1; j++) {
-                if (this.equipos[j].getPuntos() > this.equipos[j + 1].getPuntos()) {
-                    // Intercambio de valores usando una variable temporal
+
+                boolean cambiar = false;
+
+                // 1. CRITERIO PRINCIPAL: Puntos (De mayor a menor)
+                // Si el equipo actual tiene MENOS puntos que el siguiente, hay que bajarlos
+                // (swap)
+                if (this.equipos[j].getPuntos() < this.equipos[j + 1].getPuntos()) {
+                    cambiar = true;
+                }
+                // 2. DESEMPATE: Diferencia de goles
+                else if (this.equipos[j].getPuntos() == this.equipos[j + 1].getPuntos()) {
+                    int diffA = this.equipos[j].getGolesFavor() - this.equipos[j].getGolesContra();
+                    int diffB = this.equipos[j + 1].getGolesFavor() - this.equipos[j + 1].getGolesContra();
+
+                    if (diffA < diffB) { // Si tengo peor diferencia de goles, bajo.
+                        cambiar = true;
+                    }
+                }
+
+                // Al cambiar, intercambiamos los equipos, mientras más abajo, peor posición
+                if (cambiar) {
                     FilaClasificacion temp = this.equipos[j];
                     this.equipos[j] = this.equipos[j + 1];
                     this.equipos[j + 1] = temp;

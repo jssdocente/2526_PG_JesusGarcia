@@ -87,6 +87,23 @@ public class Liga {
 
     }
 
+    public void simularJornadas() {
+
+        for (Jornada jornada : this.jornadas) {
+            jornada.simularPartidos();
+
+            // Actualizar la clasificación con los resultados de la jornada
+            for (Partido partido : jornada.getPartidos()) {
+                if (partido != null && partido.isJugado()) {
+                    this.clasificacion.actualizar(partido);
+                }
+            }
+        }
+
+        // Ordenar la clasificación al final de la temporada
+        this.clasificacion.ordenar();
+    }
+
     public void imprimirCalendario() {
 
         // Recorrer cada una de las jornadas
@@ -105,6 +122,11 @@ public class Liga {
 
         }
 
+    }
+
+    public void imprimirClasificacion() {
+
+        this.clasificacion.imprimirClasificacion();
     }
 
     public void imprimrLiga() {

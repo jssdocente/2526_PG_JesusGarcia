@@ -12,6 +12,7 @@ public class TestLiga {
         // testGenerarCalendario();
         // testImprimirCalendario();
         testImprimirLiga();
+        testSimulacionLiga();
 
         System.out.println("✅ Liga verificada.");
     }
@@ -57,6 +58,24 @@ public class TestLiga {
 
         return equipos;
 
+    }
+
+    public static void testSimulacionLiga() throws Exception {
+        System.out.println("\n>>> Test: Simulación de Liga Completa");
+
+        Liga liga = new Liga();
+
+        // 1. Generar Calendario
+        liga.generarCalendario();
+
+        // 2. Simular toda la temporada
+        liga.simularJornadas();
+
+        // 3. Imprimir Clasificación final
+        liga.imprimirClasificacion();
+
+        // No podemos hacer asserts de puntos exactos porque es aleatorio,
+        // pero podemos verificar visualmente o comprobar que no sea todo 0.
     }
 
 }
